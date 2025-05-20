@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-
+use Illuminate\Validation\ValidationException;
 class Employee extends Model
 {
     use HasFactory;
@@ -32,4 +32,26 @@ class Employee extends Model
     {
         return $this->hasMany(EmployeeSalaryBase::class);
     }
+
+    protected static function booted()
+{
+    static::creating(function ($employee) {
+        if (Employee::where('code', $employee->code)->exists()) {
+            throw ValidationException::withMessages([
+                'code' => 'The employee code must be unique.',
+            ]);
+        }
+    });
+
+    static::updating(function ($employee) {
+        if (Employee::where('code', $employee->code)
+            ->where('id', '!=', $employee->id)
+            ->exists()
+        ) {
+            throw ValidationException::withMessages([
+                'code' => 'The employee code must be unique.',
+            ]);
+        }
+    });
+}
 }
