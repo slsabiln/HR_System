@@ -53,5 +53,11 @@ class Employee extends Model
             ]);
         }
     });
+
+     static::deleting(function ($employee) {
+        $employee->vacations()->delete();
+        $employee->allowances()->delete();
+        $employee->salaryBases()->delete();
+    });
 }
 }

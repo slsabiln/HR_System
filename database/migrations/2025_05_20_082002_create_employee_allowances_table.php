@@ -11,7 +11,7 @@ return new class extends Migration
     Schema::create('employee_allowances', function (\Illuminate\Database\Schema\Blueprint $table) {
         $table->id();
         $table->foreignId('employee_id')->constrained('employees')->onDelete('cascade');
-        $table->string('allowance_type')->default('Housing')->change();
+        $table->string('allowance_type')->default('Housing');
         $table->decimal('amount', 10, 2);
         $table->timestamps();
     });

@@ -14,7 +14,6 @@ class EmployeeAllowanceFactory extends Factory
        
         'allowance_type' => $this->faker->randomElement(['Housing', 'Transport', 'Food']),
         'amount' => $this->faker->numberBetween(100, 2000),
-        'effective_date' => $this->faker->date(),
     ];
     }
 
