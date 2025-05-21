@@ -1,61 +1,141 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+أكيد، هذا ملف README مضبوط بالعربي وبشكل رسمي وواضح مع تفاصيل بسيطة مهمة للمدير:
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+---
 
-## About Laravel
+# نظام إدارة الموارد البشرية (HR System) - الواجهة الخلفية
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+هذا المشروع هو نظام backend لإدارة بيانات الموارد البشرية في شركة، يشمل إدارة الموظفين، الرواتب، البدلات، الإجازات، والعلاقات بين الموظفين والمديرين. تم تطويره باستخدام Laravel واتباع منهجية التطوير المعتمد على الاختبارات (TDD).
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+---
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## نظرة عامة على المشروع
 
-## Learning Laravel
+يهدف النظام إلى توفير الوظائف الأساسية لإدارة بيانات الموظفين بشكل آمن ومرن، ويشمل:
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+* إدارة بيانات الموظفين الأساسية
+* تتبع الإجازات والبدلات الخاصة بالموظفين
+* إدارة قواعد الرواتب الشهرية
+* تعريف علاقات الموظفين مع المديرين
+* تطبيق قواعد عمل هامة مثل:
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+  * عدم السماح بعدد إجازات سلبي
+  * ضمان عدم تكرار كود الموظف
+  * ضمان عدم تكرار الرواتب لنفس الشهر
+* توفير API RESTful للعمليات الأساسية والبحث وحساب الرواتب
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+---
 
-## Laravel Sponsors
+## منهجية العمل
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+* **التطوير المعتمد على الاختبارات (TDD):** يبدأ كل متطلب باختبار فاشل، ثم كتابة كود يمرره فقط.
+* **المهاجرات (Migrations):** لإنشاء الجداول والبنية المطلوبة في قاعدة البيانات.
+* **إلوكونت (Eloquent):** لإجراء جميع العمليات على قواعد البيانات وعلاقات النماذج.
+* المشروع يشمل:
 
-### Premium Partners
+  * الموديلات (Models)
+  * المهاجرات (Migrations)
+  * الكنترولرز (Controllers)
+  * اختبارات الوحدة والميزات (Unit & Feature Tests)
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+---
 
-## Contributing
+## تفاصيل أجزاء المشروع
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### الجزء الأول: إنشاء الجداول (Migrations)
 
-## Code of Conduct
+* جدول الموظفين (employees) مع كل الحقول المطلوبة
+* جدول إجازات الموظف (employee\_vacations) يحتوي على عدد الإجازات المتاحة والمستخدمة، مرتبط بموظف
+* جدول بدلات الموظف (employee\_allowances) مرتبط بموظف
+* جدول أساس الرواتب (employee\_salary\_bases) يضمن وجود سجل راتب فريد لكل موظف لكل شهر
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+### الجزء الثاني: النماذج والعلاقات (Models & Relations)
 
-## Security Vulnerabilities
+* نموذج الموظف (Employee) يحتوي على الحقول القابلة للتعديل وعلاقات hasMany مع الإجازات والبدلات والأساسيات
+* نماذج إجازات الموظف وبدلات الموظف وأساسيات الراتب تنتمي إلى الموظف (belongsTo)
+* علاقة موظف-مدير (many-to-many) عبر جدول محوري (employees\_managers)
+* نموذج وجداول إضافية مرتبطة بالموظف حسب الحاجة
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+### الجزء الثالث: قواعد العمل (Business Rules)
 
-## License
+* عدد أيام الإجازة لا يمكن أن يكون سالباً (يتم التحقق من صحة البيانات)
+* كود الموظف يجب أن يكون فريداً (Unique)
+* لا يسمح بسجلات راتب متكررة لنفس الموظف ونفس الشهر
+* عند حذف موظف، يتم حذف جميع سجلاته المرتبطة (إجازات، بدلات، رواتب، إضافات) تلقائياً (Cascade Delete)
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+### الجزء الرابع: واجهة برمجة التطبيقات (API)
+
+* واجهات CRUD كاملة للموظفين والإجازات والبدلات
+* إمكانية البحث عن موظفين بالاسم الكامل، الكود، أو البريد الإلكتروني
+* واجهة لحساب إجمالي الراتب الشهري (الأساسي + الإضافات + البدلات)
+
+---
+
+## كيفية الإعداد
+
+1. استنساخ المشروع:
+
+```bash
+git clone <repository-url>
+```
+
+2. تثبيت الاعتمادات:
+
+```bash
+composer install
+```
+
+3. نسخ ملف البيئة وضبط إعدادات قاعدة البيانات:
+
+```bash
+cp .env.example .env
+```
+
+ثم تعديل `.env` حسب إعدادات قاعدة البيانات لديك
+4\. تشغيل المهاجرات:
+
+```bash
+php artisan migrate
+```
+
+5. (اختياري) تشغيل البيانات التجريبية:
+
+```bash
+php artisan db:seed
+```
+
+6. تشغيل الخادم المحلي:
+
+```bash
+php artisan serve
+```
+
+---
+
+## تشغيل الاختبارات
+
+لتشغيل جميع اختبارات النظام:
+
+```bash
+php artisan test
+```
+
+تشمل الاختبارات التحقق من صحة الجداول، النماذج، قواعد العمل، وواجهات الـ API.
+
+---
+
+## توثيق نقاط نهاية الـ API (API Endpoints)
+
+| الطريقة | الرابط                       | الوصف                                   |
+| ------- | ---------------------------- | --------------------------------------- |
+| GET     | `/api/employees`             | عرض جميع الموظفين                       |
+| POST    | `/api/employees`             | إنشاء موظف جديد                         |
+| GET     | `/api/employees/{id}`        | عرض تفاصيل موظف معين                    |
+| PUT     | `/api/employees/{id}`        | تحديث بيانات موظف                       |
+| DELETE  | `/api/employees/{id}`        | حذف موظف مع حذف بياناته المرتبطة        |
+| GET     | `/api/employees/search`      | البحث عن موظف بالاسم أو الكود أو البريد |
+| GET     | `/api/employees/{id}/salary` | الحصول على إجمالي راتب الموظف الشهري    |
+| CRUD    | `/api/employee-vacations`    | إدارة إجازات الموظف                     |
+| CRUD    | `/api/employee-allowances`   | إدارة بدلات الموظف                      |
+
+---
+
