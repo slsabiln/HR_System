@@ -6,12 +6,13 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\DB;
 use Tests\TestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 class EmployeeVacationsTableStructureTest extends TestCase
 {
     use RefreshDatabase;
 
-    /** @test */
+    #[Test]
     public function employee_vacations_table_has_expected_columns_and_foreign_key()
     {
         $this->assertTrue(Schema::hasTable('employee_vacations'), 'Table employee_vacations does not exist.');
@@ -43,16 +44,15 @@ class EmployeeVacationsTableStructureTest extends TestCase
 
         $this->assertNotEmpty($foreignKeys, 'Foreign key on employee_id referencing employees.id does not exist.');
     }
-/** @test */
+    #[Test]
     public function test_employee_has_many_vacations()
-{
-    $employee = \App\Models\Employee::factory()->create();
+    {
+        $employee = \App\Models\Employee::factory()->create();
 
-    $vacation = \App\Models\EmployeeVacation::factory()
-        ->for($employee)
-        ->create();
+        $vacation = \App\Models\EmployeeVacation::factory()
+            ->for($employee)
+            ->create();
 
-    $this->assertTrue($employee->vacations->contains($vacation));
-}
-
+        $this->assertTrue($employee->vacations->contains($vacation));
+    }
 }

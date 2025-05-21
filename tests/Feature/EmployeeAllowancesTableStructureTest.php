@@ -6,12 +6,12 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\DB;
 use Tests\TestCase;
-
+use PHPUnit\Framework\Attributes\Test;
 class EmployeeAllowancesTableStructureTest extends TestCase
 {
     use RefreshDatabase;
 
-    /** @test */
+   #[Test]
     public function employee_allowances_table_has_expected_columns_and_foreign_key()
     {
         $this->assertTrue(Schema::hasTable('employee_allowances'), 'Table employee_allowances does not exist.');
@@ -43,7 +43,7 @@ class EmployeeAllowancesTableStructureTest extends TestCase
         $this->assertNotEmpty($foreignKeys, 'Foreign key on employee_id referencing employees.id does not exist.');
     }
 
-    /** @test */
+    #[Test]
     public function test_employee_has_many_allowances()
 {
     // أنشئ موظف جديد

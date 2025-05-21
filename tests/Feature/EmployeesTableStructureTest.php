@@ -5,12 +5,12 @@ namespace Tests\Feature;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Schema;
 use Tests\TestCase;
-
+use PHPUnit\Framework\Attributes\Test;
 class EmployeesTableStructureTest extends TestCase
 {
     use RefreshDatabase;
 
-    /** @test */
+     #[Test]
     public function employees_table_has_expected_columns()
     {
         $this->assertTrue(Schema::hasTable('employees'), 'Table employees does not exist.');

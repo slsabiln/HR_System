@@ -8,12 +8,12 @@ use App\Models\EmployeeVacation;
 use App\Models\EmployeeSalaryBase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
-
+use PHPUnit\Framework\Attributes\Test;
 class EmployeeModelTest extends TestCase
 {
     use RefreshDatabase;
 
-    /** @test */
+     #[Test]
     public function fillable_fields_are_set_correctly()
     {
         $employee = new Employee();
@@ -28,7 +28,7 @@ class EmployeeModelTest extends TestCase
         ], $employee->getFillable());
     }
 
-    /** @test */
+     #[Test]
     public function employee_has_many_vacations()
     {
         $employee = Employee::factory()->create();
@@ -40,7 +40,7 @@ class EmployeeModelTest extends TestCase
         $this->assertTrue($employee->vacations->contains($vacation));
     }
 
-    /** @test */
+     #[Test]
     public function employee_has_many_allowances()
     {
         $employee = Employee::factory()->create();
@@ -52,7 +52,7 @@ class EmployeeModelTest extends TestCase
         $this->assertTrue($employee->allowances->contains($allowance));
     }
 
-    /** @test */
+     #[Test]
     public function employee_has_many_salary_bases()
     {
         $employee = Employee::factory()->create();
